@@ -1,0 +1,2206 @@
+{
+  "catalog_version": "1.0",
+  "source_name": "列举奥数考点.md",
+  "entries": [
+    {
+      "level_1": "计算",
+      "level_2": "整数巧算",
+      "level_3": "凑整法",
+      "typical_question": "199+298+301+202",
+      "applicable_grade": "2—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "整数巧算",
+      "level_3": "配对法",
+      "typical_question": "首尾配对、相邻配对",
+      "applicable_grade": "2—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "整数巧算",
+      "level_3": "分组法",
+      "typical_question": "若干数重新分组计算",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "整数巧算",
+      "level_3": "基准数法",
+      "typical_question": "一组数接近100、1000",
+      "applicable_grade": "3—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "整数巧算",
+      "level_3": "补数法",
+      "typical_question": "999、9999附近计算",
+      "applicable_grade": "3—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "运算律",
+      "level_3": "加法交换结合律",
+      "typical_question": "调整运算顺序",
+      "applicable_grade": "2—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "运算律",
+      "level_3": "乘法交换结合律",
+      "typical_question": "连乘巧算",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "运算律",
+      "level_3": "乘法分配律",
+      "typical_question": "直接运用",
+      "applicable_grade": "4—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "运算律",
+      "level_3": "逆用分配律",
+      "typical_question": "提取公因数",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "运算技巧",
+      "level_3": "添括号去括号",
+      "typical_question": "连加连减",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "运算技巧",
+      "level_3": "连续数求和",
+      "typical_question": "1+2+…+n",
+      "applicable_grade": "3—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "分数巧算",
+      "level_3": "分数加减巧算",
+      "typical_question": "通分、拆分、配对",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "分数巧算",
+      "level_3": "分数乘除巧算",
+      "typical_question": "约分、变形",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "分数巧算",
+      "level_3": "繁分数",
+      "typical_question": "多层分数化简",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "裂项",
+      "level_3": "分数裂项",
+      "typical_question": "1/(n×(n+1))型",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "裂项",
+      "level_3": "裂项相消",
+      "typical_question": "连续分数求和",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "小数",
+      "level_3": "小数巧算",
+      "typical_question": "小数与整数结合",
+      "applicable_grade": "4—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "循环小数",
+      "level_3": "循环小数认识",
+      "typical_question": "纯循环、混循环",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "循环小数",
+      "level_3": "循环小数化分数",
+      "typical_question": "0.333…、0.12̇3̇等",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "特殊运算",
+      "level_3": "定义新运算",
+      "typical_question": "a※b定义型",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "算式谜",
+      "level_3": "运算符号填空",
+      "typical_question": "加符号使等式成立",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "算式谜",
+      "level_3": "数字填空",
+      "typical_question": "□中填数",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计算",
+      "level_2": "算式谜",
+      "level_3": "竖式数字谜",
+      "typical_question": "虫食算",
+      "applicable_grade": "3—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "整除",
+      "level_3": "2、5整除特征",
+      "typical_question": "末位判断",
+      "applicable_grade": "4—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "整除",
+      "level_3": "3、9整除特征",
+      "typical_question": "数字和",
+      "applicable_grade": "4—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "整除",
+      "level_3": "4、25整除特征",
+      "typical_question": "末两位判断",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "整除",
+      "level_3": "8、125整除特征",
+      "typical_question": "末三位判断",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "整除",
+      "level_3": "11整除特征",
+      "typical_question": "奇偶位数字和",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "整除",
+      "level_3": "7、11、13整除",
+      "typical_question": "分段、特殊方法",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "整除",
+      "level_3": "数字填空",
+      "typical_question": "缺一个数字使其整除",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "整除",
+      "level_3": "多条件整除",
+      "typical_question": "同时被若干数整除",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "因数倍数",
+      "level_3": "因数枚举",
+      "typical_question": "求一个数所有因数",
+      "applicable_grade": "4—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "因数倍数",
+      "level_3": "因数个数",
+      "typical_question": "质因数指数法",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "因数倍数",
+      "level_3": "因数和",
+      "typical_question": "求全部因数之和",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "因数倍数",
+      "level_3": "因数积",
+      "typical_question": "成对因数",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "最大公因数",
+      "level_3": "公因数",
+      "typical_question": "分组、截段",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "最大公因数",
+      "level_3": "最大公因数应用",
+      "typical_question": "最长边、最大分组",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "最小公倍数",
+      "level_3": "公倍数",
+      "typical_question": "周期重合",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "最小公倍数",
+      "level_3": "最小公倍数应用",
+      "typical_question": "同时发生、再次相遇",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "质因数分解",
+      "level_3": "分解质因数",
+      "typical_question": "标准分解式",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "公因公倍",
+      "level_3": "辗转相除思想",
+      "typical_question": "大数求最大公因数",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "质数合数",
+      "level_3": "质数判断",
+      "typical_question": "一个数是不是质数",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "质数合数",
+      "level_3": "质数分拆",
+      "typical_question": "一个数表示为质数之和",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "质数合数",
+      "level_3": "质数乘积",
+      "typical_question": "pq型数",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "质数合数",
+      "level_3": "质数综合",
+      "typical_question": "质数与奇偶、整除结合",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "奇偶性",
+      "level_3": "和差奇偶性",
+      "typical_question": "奇±奇、奇±偶",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "奇偶性",
+      "level_3": "积的奇偶性",
+      "typical_question": "多个整数乘积",
+      "applicable_grade": "4—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "奇偶性",
+      "level_3": "奇偶分析",
+      "typical_question": "判断结果可能性",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "奇偶性",
+      "level_3": "奇偶证明",
+      "typical_question": "“是否可能”问题",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "奇偶性",
+      "level_3": "操作问题",
+      "typical_question": "翻牌、换数",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "余数",
+      "level_3": "带余除法",
+      "typical_question": "被除数、除数、商、余数",
+      "applicable_grade": "4—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "余数",
+      "level_3": "和差余数",
+      "typical_question": "多数相加求余数",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "余数",
+      "level_3": "乘积余数",
+      "typical_question": "大数乘积",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "余数",
+      "level_3": "周期余数",
+      "typical_question": "幂、周期数列",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "余数",
+      "level_3": "同余思想",
+      "typical_question": "相同余数问题",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "余数",
+      "level_3": "中国余数型",
+      "typical_question": "除以2余1、除以3余2……",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "尾数",
+      "level_3": "个位数字",
+      "typical_question": "大数乘方个位",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "尾数",
+      "level_3": "末两位",
+      "typical_question": "大数末两位",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "周期",
+      "level_3": "幂的周期",
+      "typical_question": "2ⁿ、3ⁿ等末位",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "周期",
+      "level_3": "数字循环",
+      "typical_question": "周期排列第n项",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "平方数",
+      "level_3": "平方数特征",
+      "typical_question": "判断能否为平方数",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "平方数",
+      "level_3": "平方数末位",
+      "typical_question": "0、1、4、5、6、9",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "平方数",
+      "level_3": "因数个数",
+      "typical_question": "奇数个因数",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "平方数",
+      "level_3": "相邻平方数",
+      "typical_question": "两个平方数之间",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "数字问题",
+      "level_3": "位值原理",
+      "typical_question": "abc=100a+10b+c",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "数字问题",
+      "level_3": "数字和",
+      "typical_question": "各位数字之和",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "数字问题",
+      "level_3": "数字积",
+      "typical_question": "各位数字乘积",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "数字问题",
+      "level_3": "数字倒排",
+      "typical_question": "ab与ba",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "数字问题",
+      "level_3": "回文数",
+      "typical_question": "1221、12321",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "数字问题",
+      "level_3": "页码问题",
+      "typical_question": "编页码用了多少数字",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数论",
+      "level_2": "数字问题",
+      "level_3": "数字出现次数",
+      "typical_question": "1—1000中出现几个“1”",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "找规律",
+      "level_3": "数字规律",
+      "typical_question": "1，3，5，7……",
+      "applicable_grade": "1—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "找规律",
+      "level_3": "图形规律",
+      "typical_question": "图形数量变化",
+      "applicable_grade": "1—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "找规律",
+      "level_3": "数表规律",
+      "typical_question": "数表填空",
+      "applicable_grade": "2—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "周期",
+      "level_3": "周期数列",
+      "typical_question": "第n个是什么",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "递推",
+      "level_3": "递推数列",
+      "typical_question": "后项由前项产生",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "等差数列",
+      "level_3": "通项",
+      "typical_question": "求第n项",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "等差数列",
+      "level_3": "项数",
+      "typical_question": "首项、末项、公差",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "等差数列",
+      "level_3": "求和",
+      "typical_question": "高斯求和",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "特殊数列",
+      "level_3": "平方数列",
+      "typical_question": "1、4、9、16……",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "特殊数列",
+      "level_3": "三角数",
+      "typical_question": "1、3、6、10……",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "特殊数列",
+      "level_3": "斐波那契",
+      "typical_question": "1、1、2、3、5……",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "数列规律",
+      "level_2": "特殊数列",
+      "level_3": "分组数列",
+      "typical_question": "1/1，1/2、2/1……",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "和差倍",
+      "level_3": "和差问题",
+      "typical_question": "已知和、差求两数",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "和差倍",
+      "level_3": "和倍问题",
+      "typical_question": "和与倍数关系",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "和差倍",
+      "level_3": "差倍问题",
+      "typical_question": "差与倍数关系",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "和差倍",
+      "level_3": "多量和差倍",
+      "typical_question": "三个及以上数量",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "和差倍",
+      "level_3": "变化后倍数",
+      "typical_question": "给出、增加、减少后",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "年龄",
+      "level_3": "年龄差不变",
+      "typical_question": "父子年龄",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "年龄",
+      "level_3": "年龄倍数",
+      "typical_question": "什么时候几倍",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "年龄",
+      "level_3": "多人年龄",
+      "typical_question": "三代人年龄",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "平均数",
+      "level_3": "基本平均数",
+      "typical_question": "总量÷份数",
+      "applicable_grade": "4—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "平均数",
+      "level_3": "移多补少",
+      "typical_question": "不直接计算总量",
+      "applicable_grade": "3—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "平均数",
+      "level_3": "平均数变化",
+      "typical_question": "加入/去掉一个数",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "平均数",
+      "level_3": "分组平均",
+      "typical_question": "男女生平均成绩",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "平均数",
+      "level_3": "加权平均",
+      "typical_question": "不同人数不同平均值",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "盈亏",
+      "level_3": "盈亏型",
+      "typical_question": "每人5个多3个，每人7个少5个",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "盈亏",
+      "level_3": "盈盈型",
+      "typical_question": "两种分法都剩余",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "盈亏",
+      "level_3": "亏亏型",
+      "typical_question": "两种分法都不足",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "盈亏",
+      "level_3": "条件变化",
+      "typical_question": "人数、物品数变化",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "鸡兔同笼",
+      "level_3": "基本鸡兔",
+      "typical_question": "头、脚",
+      "applicable_grade": "4—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "鸡兔同笼",
+      "level_3": "假设法",
+      "typical_question": "全假设为鸡",
+      "applicable_grade": "4—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "鸡兔同笼",
+      "level_3": "得失问题",
+      "typical_question": "答对得分、答错扣分",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "鸡兔同笼",
+      "level_3": "多种对象",
+      "typical_question": "三种动物",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "鸡兔同笼",
+      "level_3": "变式",
+      "typical_question": "轮子、钱币、票价",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "消去",
+      "level_3": "加减消元",
+      "typical_question": "苹果梨价格",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "消去",
+      "level_3": "倍数消元",
+      "typical_question": "两个条件配套",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "归一",
+      "level_3": "单一量",
+      "typical_question": "先求1份",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "归总",
+      "level_3": "总量不变",
+      "typical_question": "先求总量再分配",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "应用题",
+      "level_2": "归一归总",
+      "level_3": "综合变化",
+      "typical_question": "人数、天数变化",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "比例",
+      "level_2": "比",
+      "level_3": "按比分配",
+      "typical_question": "两量、三量按比",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "比例",
+      "level_2": "比",
+      "level_3": "连比",
+      "typical_question": "A:B、B:C求A:B:C",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "比例",
+      "level_2": "比例",
+      "level_3": "正比例",
+      "typical_question": "同倍变化",
+      "applicable_grade": "6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "比例",
+      "level_2": "比例",
+      "level_3": "反比例",
+      "typical_question": "工效与时间等",
+      "applicable_grade": "6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "百分数",
+      "level_2": "百分率",
+      "level_3": "增长率",
+      "typical_question": "增长百分之几",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "百分数",
+      "level_2": "百分率",
+      "level_3": "降低率",
+      "typical_question": "降低百分之几",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "百分数",
+      "level_2": "百分率",
+      "level_3": "连续涨跌",
+      "typical_question": "先涨20%再降20%",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "经济",
+      "level_2": "利润",
+      "level_3": "成本、售价、利润",
+      "typical_question": "商品销售",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "经济",
+      "level_2": "利润",
+      "level_3": "利润率",
+      "typical_question": "定价、打折",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "经济",
+      "level_2": "折扣",
+      "level_3": "多次折扣",
+      "typical_question": "折上折",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "浓度",
+      "level_2": "基础浓度",
+      "level_3": "溶质、溶液",
+      "typical_question": "浓度基本关系",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "浓度",
+      "level_2": "稀释",
+      "level_3": "加水",
+      "typical_question": "浓度降低",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "浓度",
+      "level_2": "浓缩",
+      "level_3": "蒸发水分",
+      "typical_question": "浓度提高",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "浓度",
+      "level_2": "混合",
+      "level_3": "两种溶液混合",
+      "typical_question": "求混合浓度",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "浓度",
+      "level_2": "反复操作",
+      "level_3": "倒出再加水",
+      "typical_question": "多次稀释",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "浓度",
+      "level_2": "十字交叉",
+      "level_3": "两浓度混合",
+      "typical_question": "求配比",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "基本行程",
+      "level_3": "路程速度时间",
+      "typical_question": "s=vt",
+      "applicable_grade": "4—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "相遇",
+      "level_3": "一次相遇",
+      "typical_question": "两地相向",
+      "applicable_grade": "4—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "相遇",
+      "level_3": "中途相遇",
+      "typical_question": "出发时间不同",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "相遇",
+      "level_3": "多次相遇",
+      "typical_question": "往返多次相遇",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "追及",
+      "level_3": "同向追及",
+      "typical_question": "前后出发",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "往返",
+      "level_3": "往返问题",
+      "typical_question": "到终点折返",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "变速",
+      "level_3": "分段速度",
+      "typical_question": "中途改变速度",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "变速",
+      "level_3": "休息问题",
+      "typical_question": "走走停停",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "提前迟到",
+      "level_3": "提前/迟到",
+      "typical_question": "不同速度上下学",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "接送",
+      "level_3": "接送问题",
+      "typical_question": "汽车接人",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "环形",
+      "level_3": "环形相遇",
+      "typical_question": "相向而行",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "环形",
+      "level_3": "环形追及",
+      "typical_question": "同向运动",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "火车",
+      "level_3": "火车过人",
+      "typical_question": "车长问题",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "火车",
+      "level_3": "火车过桥",
+      "typical_question": "车长+桥长",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "火车",
+      "level_3": "两车相遇",
+      "typical_question": "两列火车",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "流水行船",
+      "level_3": "顺水逆水",
+      "typical_question": "船速、水速",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "流水行船",
+      "level_3": "漂流",
+      "typical_question": "漂流物速度",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "扶梯",
+      "level_3": "自动扶梯",
+      "typical_question": "人走+扶梯运动",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "发车",
+      "level_3": "发车间隔",
+      "typical_question": "公交车相遇",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "时钟",
+      "level_3": "钟面追及",
+      "typical_question": "时针分针重合",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "行程",
+      "level_2": "时钟",
+      "level_3": "钟面角度",
+      "typical_question": "垂直、成指定角度",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "基本工程",
+      "level_3": "工作总量",
+      "typical_question": "把总量看作“1”",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "基本工程",
+      "level_3": "工作效率",
+      "typical_question": "1÷时间",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "合作",
+      "level_3": "两人合作",
+      "typical_question": "甲乙合做",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "合作",
+      "level_3": "多人合作",
+      "typical_question": "三人以上",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "变化",
+      "level_3": "中途加入",
+      "typical_question": "甲先做乙后加入",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "变化",
+      "level_3": "中途退出",
+      "typical_question": "中途离开",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "变化",
+      "level_3": "轮流工作",
+      "typical_question": "甲乙轮换",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "变化",
+      "level_3": "工效变化",
+      "typical_question": "提高/降低效率",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程",
+      "level_2": "水池",
+      "level_3": "注水排水",
+      "typical_question": "水管进出水",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "工程资源",
+      "level_2": "牛吃草",
+      "level_3": "标准牛吃草",
+      "typical_question": "牛数不同、吃完天数不同",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程资源",
+      "level_2": "牛吃草",
+      "level_3": "草生长速度",
+      "typical_question": "求每天新长草量",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程资源",
+      "level_2": "牛吃草",
+      "level_3": "原有草量",
+      "typical_question": "求原始资源量",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程资源",
+      "level_2": "牛吃草",
+      "level_3": "求牛数",
+      "typical_question": "若干天吃完最多放几头牛",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程资源",
+      "level_2": "牛吃草",
+      "level_3": "求天数",
+      "typical_question": "给定牛数求可吃多少天",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程资源",
+      "level_2": "牛吃草",
+      "level_3": "多组条件",
+      "typical_question": "三组牛数、天数数据",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程资源",
+      "level_2": "牛吃草",
+      "level_3": "变式模型",
+      "typical_question": "水库、牧草、机器、资源增长",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "工程资源",
+      "level_2": "牛吃草",
+      "level_3": "资源减少型",
+      "typical_question": "资源自身减少+外部消耗",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "角",
+      "level_3": "角度计算",
+      "typical_question": "已知部分角求未知角",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "角",
+      "level_3": "平角周角",
+      "typical_question": "180°、360°",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "角",
+      "level_3": "多角关系",
+      "typical_question": "多个角组合",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "折叠",
+      "level_3": "折叠角度",
+      "typical_question": "对称、重叠",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "三角形",
+      "level_3": "内角和",
+      "typical_question": "180°",
+      "applicable_grade": "4—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "三角形",
+      "level_3": "外角",
+      "typical_question": "外角关系",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "三角形",
+      "level_3": "三边关系",
+      "typical_question": "能否组成三角形",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "三角形",
+      "level_3": "等腰三角形",
+      "typical_question": "底角相等",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "三角形",
+      "level_3": "等边三角形",
+      "typical_question": "60°",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "三角形面积",
+      "level_3": "等底等高",
+      "typical_question": "面积相等",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "三角形面积",
+      "level_3": "同底面积比",
+      "typical_question": "高之比",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "三角形面积",
+      "level_3": "同高面积比",
+      "typical_question": "底之比",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "四边形",
+      "level_3": "长方形正方形",
+      "typical_question": "周长面积综合",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "四边形",
+      "level_3": "平行四边形",
+      "typical_question": "等底等高",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "四边形",
+      "level_3": "梯形",
+      "typical_question": "面积、上下底",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "面积模型",
+      "level_3": "割补法",
+      "typical_question": "不规则图形面积",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "面积模型",
+      "level_3": "平移法",
+      "typical_question": "平移拼图",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "面积模型",
+      "level_3": "旋转法",
+      "typical_question": "图形旋转",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "面积模型",
+      "level_3": "等积变换",
+      "typical_question": "改形不改面积",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "面积模型",
+      "level_3": "鸟头模型",
+      "typical_question": "三角形面积比",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "面积模型",
+      "level_3": "蝴蝶模型",
+      "typical_question": "梯形/四边形面积比",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "面积模型",
+      "level_3": "沙漏模型",
+      "typical_question": "相似结构面积比",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "面积模型",
+      "level_3": "燕尾模型",
+      "typical_question": "三角形分割",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "圆",
+      "level_3": "圆周长",
+      "typical_question": "圆、半圆周长",
+      "applicable_grade": "6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "圆",
+      "level_3": "圆面积",
+      "typical_question": "圆、半圆面积",
+      "applicable_grade": "6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "圆",
+      "level_3": "扇形",
+      "typical_question": "扇形周长面积",
+      "applicable_grade": "6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "圆",
+      "level_3": "圆环",
+      "typical_question": "大圆减小圆",
+      "applicable_grade": "6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "圆",
+      "level_3": "阴影面积",
+      "typical_question": "圆与方形组合",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "几何",
+      "level_2": "圆",
+      "level_3": "滚动问题",
+      "typical_question": "圆滚动圈数",
+      "applicable_grade": "6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "长方体",
+      "level_3": "表面积",
+      "typical_question": "长宽高关系",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "长方体",
+      "level_3": "体积",
+      "typical_question": "长宽高",
+      "applicable_grade": "5—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "正方体",
+      "level_3": "展开图",
+      "typical_question": "11种展开图相关",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "正方体",
+      "level_3": "相对面",
+      "typical_question": "展开图对应",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "染色",
+      "level_3": "一面染色",
+      "typical_question": "大正方体切小块",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "染色",
+      "level_3": "两面染色",
+      "typical_question": "棱上小块",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "染色",
+      "level_3": "三面染色",
+      "typical_question": "顶点小块",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "切割",
+      "level_3": "切割次数",
+      "typical_question": "切成立方体",
+      "applicable_grade": "5—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "拼接",
+      "level_3": "表面积变化",
+      "typical_question": "小块拼大块",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "计数",
+      "level_3": "小正方体计数",
+      "typical_question": "堆积木",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "立体几何",
+      "level_2": "三视图",
+      "level_3": "观察物体",
+      "typical_question": "前视、侧视、俯视",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "枚举",
+      "level_3": "有序枚举",
+      "typical_question": "不重不漏",
+      "applicable_grade": "2—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "枚举",
+      "level_3": "分类枚举",
+      "typical_question": "分类讨论",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "枚举",
+      "level_3": "树形图",
+      "typical_question": "搭配问题",
+      "applicable_grade": "3—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "基本原理",
+      "level_3": "加法原理",
+      "typical_question": "分类完成",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "基本原理",
+      "level_3": "乘法原理",
+      "typical_question": "分步完成",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "排列",
+      "level_3": "基本排列",
+      "typical_question": "排队",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "排列",
+      "level_3": "数字排列",
+      "typical_question": "组成几位数",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "排列",
+      "level_3": "相邻问题",
+      "typical_question": "两人必须相邻",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "排列",
+      "level_3": "不相邻问题",
+      "typical_question": "插空思想",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "排列",
+      "level_3": "特殊位置",
+      "typical_question": "首位、末位限制",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "组合",
+      "level_3": "选人选物",
+      "typical_question": "从若干选若干",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "组合",
+      "level_3": "握手问题",
+      "typical_question": "两两组合",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "组合",
+      "level_3": "比赛场数",
+      "typical_question": "单循环赛",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "图形计数",
+      "level_3": "数线段",
+      "typical_question": "多点线段",
+      "applicable_grade": "3—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "图形计数",
+      "level_3": "数角",
+      "typical_question": "基本射线组合",
+      "applicable_grade": "3—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "图形计数",
+      "level_3": "数三角形",
+      "typical_question": "规则/复杂图形",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "图形计数",
+      "level_3": "数正方形",
+      "typical_question": "网格图",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "图形计数",
+      "level_3": "数长方形",
+      "typical_question": "网格组合",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "容斥",
+      "level_3": "两集合",
+      "typical_question": "A+B−重复",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "容斥",
+      "level_3": "三集合",
+      "typical_question": "三集合交叉",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "计数",
+      "level_2": "容斥",
+      "level_3": "至少一个",
+      "typical_question": "正向/反向计数",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "抽屉原理",
+      "level_3": "基本抽屉",
+      "typical_question": "n+1放n个抽屉",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "抽屉原理",
+      "level_3": "至少问题",
+      "typical_question": "至少有几个相同",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "抽屉原理",
+      "level_3": "最差原则",
+      "typical_question": "保证取到",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "最值",
+      "level_3": "最大最小",
+      "typical_question": "条件下求极值",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "最值",
+      "level_3": "极端思想",
+      "typical_question": "从最极端情况分析",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "染色",
+      "level_3": "黑白染色",
+      "typical_question": "棋盘题",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "染色",
+      "level_3": "奇偶染色",
+      "typical_question": "证明不能完成",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "覆盖",
+      "level_3": "棋盘覆盖",
+      "typical_question": "多米诺骨牌",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "拼接",
+      "level_3": "图形拼接",
+      "typical_question": "能否拼成指定图形",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "组合",
+      "level_2": "剪拼",
+      "level_3": "图形切割",
+      "typical_question": "最少切几刀",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "真假话",
+      "level_3": "一真一假",
+      "typical_question": "谁说真话",
+      "applicable_grade": "2—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "真假话",
+      "level_3": "多人真假",
+      "typical_question": "若干人陈述",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "条件推理",
+      "level_3": "排除法",
+      "typical_question": "根据条件逐一排除",
+      "applicable_grade": "2—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "条件推理",
+      "level_3": "假设法",
+      "typical_question": "假设某条件成立",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "对应",
+      "level_3": "人物对应",
+      "typical_question": "人—职业—地点",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "表格推理",
+      "level_3": "多条件对应",
+      "typical_question": "逻辑表",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "顺序",
+      "level_3": "名次推理",
+      "typical_question": "谁在谁前面",
+      "applicable_grade": "2—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "比赛",
+      "level_3": "胜负关系",
+      "typical_question": "循环赛结果",
+      "applicable_grade": "4—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "逻辑",
+      "level_2": "比赛",
+      "level_3": "积分推理",
+      "typical_question": "胜平负积分",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "操作",
+      "level_2": "移动",
+      "level_3": "移火柴",
+      "typical_question": "移1根使等式成立",
+      "applicable_grade": "1—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "操作",
+      "level_2": "移动",
+      "level_3": "移硬币",
+      "typical_question": "改变排列形状",
+      "applicable_grade": "2—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "操作",
+      "level_2": "翻转",
+      "level_3": "翻牌",
+      "typical_question": "正反面变化",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "操作",
+      "level_2": "开关",
+      "level_3": "开关灯",
+      "typical_question": "多次切换",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "操作",
+      "level_2": "倒水",
+      "level_3": "量水问题",
+      "typical_question": "无刻度容器",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "操作",
+      "level_2": "称量",
+      "level_3": "天平称量",
+      "typical_question": "找次品",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "操作",
+      "level_2": "切割",
+      "level_3": "切蛋糕",
+      "typical_question": "最多块数",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "不变量",
+      "level_2": "奇偶",
+      "level_3": "奇偶不变量",
+      "typical_question": "操作后奇偶不变",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "不变量",
+      "level_2": "总和",
+      "level_3": "和不变量",
+      "typical_question": "数字变化问题",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "不变量",
+      "level_2": "余数",
+      "level_3": "模意义不变量",
+      "typical_question": "操作可行性",
+      "applicable_grade": "5—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "游戏",
+      "level_2": "取石子",
+      "level_3": "必胜策略",
+      "typical_question": "每次取1—3颗",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "游戏",
+      "level_2": "抢数",
+      "level_3": "抢数游戏",
+      "typical_question": "谁能抢到目标数",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "游戏",
+      "level_2": "策略",
+      "level_3": "配对策略",
+      "typical_question": "成对控制",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "游戏",
+      "level_2": "策略",
+      "level_3": "对称策略",
+      "typical_question": "镜像应对",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "游戏",
+      "level_2": "策略",
+      "level_3": "倒推",
+      "typical_question": "从终局反推",
+      "applicable_grade": "4—6",
+      "default_difficulty": "高阶"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "植树",
+      "level_3": "两端都植",
+      "typical_question": "棵数=间隔+1",
+      "applicable_grade": "2—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "植树",
+      "level_3": "两端不植",
+      "typical_question": "棵数=间隔−1",
+      "applicable_grade": "2—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "植树",
+      "level_3": "一端植",
+      "typical_question": "棵数=间隔数",
+      "applicable_grade": "2—5",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "植树",
+      "level_3": "环形植树",
+      "typical_question": "棵数=间隔数",
+      "applicable_grade": "3—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "方阵",
+      "level_3": "实心方阵",
+      "typical_question": "总人数=n²",
+      "applicable_grade": "3—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "方阵",
+      "level_3": "空心方阵",
+      "typical_question": "外层人数",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "间隔",
+      "level_3": "锯木头",
+      "typical_question": "次数=段数−1",
+      "applicable_grade": "2—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "间隔",
+      "level_3": "爬楼梯",
+      "typical_question": "楼层与间隔",
+      "applicable_grade": "2—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "间隔",
+      "level_3": "敲钟",
+      "typical_question": "次数与间隔",
+      "applicable_grade": "2—5",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "周期",
+      "level_3": "星期问题",
+      "typical_question": "若干天后星期几",
+      "applicable_grade": "3—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "周期",
+      "level_3": "日期问题",
+      "typical_question": "周期为7",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "日历",
+      "level_3": "闰年",
+      "typical_question": "平闰年判断",
+      "applicable_grade": "3—6",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "日历",
+      "level_3": "月历规律",
+      "typical_question": "九宫格日期",
+      "applicable_grade": "3—6",
+      "default_difficulty": "进阶"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "排队",
+      "level_3": "前后位置",
+      "typical_question": "从前第a、从后第b",
+      "applicable_grade": "1—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "排队",
+      "level_3": "总人数",
+      "typical_question": "a+b−1",
+      "applicable_grade": "1—4",
+      "default_difficulty": "基础"
+    },
+    {
+      "level_1": "杂题",
+      "level_2": "排队",
+      "level_3": "插队变化",
+      "typical_question": "人数、位置变化",
+      "applicable_grade": "2—5",
+      "default_difficulty": "进阶"
+    }
+  ]
+}
