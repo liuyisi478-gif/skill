@@ -1,0 +1,7 @@
+interface:
+  display_name: "扫描试卷转标准题库包"
+  short_description: "将小学奥数 PDF、扫描页或零散题目图片拆题并生成标准题库 ZIP"
+  default_prompt: "使用 $scan-pdf-to-question-package 将这套奥数试卷 PDF 拆题并生成标准题库 ZIP；每题保留完整题目截图，按三级知识点目录标注，并补全答案与解析。"
+
+policy:
+  allow_implicit_invocation: true
