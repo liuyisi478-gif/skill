@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a PDF and extract page text blocks for Codex-assisted proofreading."""
+"""Render body and optional answer PDFs for Codex-assisted proofreading."""
 
 from __future__ import annotations
 
@@ -36,30 +36,35 @@ def normalized_bbox(word: dict, width: float, height: float) -> dict[str, float]
     }
 
 
-def prepare(pdf_path: Path, work_dir: Path, scale: float) -> Path:
+def prepare_document(
+    pdf_path: Path,
+    work_dir: Path,
+    document_id: str,
+    label: str,
+    scale: float,
+    pdftoppm: str,
+) -> dict:
     if not pdf_path.is_file():
-        raise FileNotFoundError(f"找不到 PDF：{pdf_path}")
+        raise FileNotFoundError(f"找不到{label} PDF：{pdf_path}")
     if pdf_path.suffix.lower() != ".pdf":
-        raise ValueError("输入文件必须是 PDF。")
-    if scale < 1.0 or scale > 4.0:
-        raise ValueError("--scale 必须在 1.0 到 4.0 之间。")
+        raise ValueError(f"{label}文件必须是 PDF。")
 
-    pages_dir = work_dir / "pages"
-    text_dir = work_dir / "text"
-    blocks_dir = work_dir / "blocks"
+    role_root = work_dir / document_id
+    if role_root.exists():
+        shutil.rmtree(role_root)
+    pages_dir = role_root / "pages"
+    text_dir = role_root / "text"
+    blocks_dir = role_root / "blocks"
     for directory in (pages_dir, text_dir, blocks_dir):
         directory.mkdir(parents=True, exist_ok=True)
 
-    pdftoppm = shutil.which("pdftoppm")
-    if not pdftoppm:
-        raise RuntimeError("缺少 Poppler 的 pdftoppm，无法渲染 PDF 页面。")
     dpi = round(72 * scale)
-    manifest_pages: list[dict] = []
     try:
         document = pdfplumber.open(pdf_path)
     except Exception as exc:
-        raise ValueError("无法打开 PDF；文件可能损坏或已加密。") from exc
+        raise ValueError(f"无法打开{label} PDF；文件可能损坏或已加密。") from exc
 
+    manifest_pages: list[dict] = []
     with document:
         for index, page in enumerate(document.pages, start=1):
             width, height = float(page.width), float(page.height)
@@ -67,7 +72,6 @@ def prepare(pdf_path: Path, work_dir: Path, scale: float) -> Path:
             text_name = f"page-{index:04d}.txt"
             blocks_name = f"page-{index:04d}.json"
 
-            output_prefix = pages_dir / f"page-{index:04d}"
             subprocess.run(
                 [
                     pdftoppm,
@@ -77,16 +81,16 @@ def prepare(pdf_path: Path, work_dir: Path, scale: float) -> Path:
                     "-png",
                     "-r", str(dpi),
                     str(pdf_path),
-                    str(output_prefix),
+                    str(pages_dir / f"page-{index:04d}"),
                 ],
                 check=True,
                 capture_output=True,
             )
 
-            raw_words = page.extract_words(use_text_flow=True, keep_blank_chars=False) or []
+            words = page.extract_words(use_text_flow=True, keep_blank_chars=False) or []
             blocks = []
             extracted_parts = []
-            for word in raw_words:
+            for word in words:
                 text = str(word.get("text", "")).strip()
                 if not text:
                     continue
@@ -103,36 +107,73 @@ def prepare(pdf_path: Path, work_dir: Path, scale: float) -> Path:
                     "page": index,
                     "width": round(width, 3),
                     "height": round(height, 3),
-                    "image": f"pages/{image_name}",
-                    "text": f"text/{text_name}",
-                    "blocks": f"blocks/{blocks_name}",
+                    "image": f"pages/{document_id}/{image_name}",
+                    "work_image": f"{document_id}/pages/{image_name}",
+                    "text": f"{document_id}/text/{text_name}",
+                    "blocks": f"{document_id}/blocks/{blocks_name}",
                     "extracted_characters": len(extracted_text),
                     "likely_scanned": len(extracted_text.strip()) < 20,
                 }
             )
-    manifest = {
+
+    return {
+        "id": document_id,
+        "role": document_id,
+        "label": label,
         "source_name": pdf_path.name,
         "source_sha256": sha256(pdf_path),
         "page_count": len(manifest_pages),
-        "render_scale": scale,
         "pages": manifest_pages,
+    }
+
+
+def prepare(body: Path, answer: Path | None, work_dir: Path, scale: float) -> Path:
+    if scale < 1.0 or scale > 4.0:
+        raise ValueError("--scale 必须在 1.0 到 4.0 之间。")
+    if answer and body.resolve() == answer.resolve():
+        raise ValueError("正文与答案是同一个 PDF 时，请只传 --body。")
+    pdftoppm = shutil.which("pdftoppm")
+    if not pdftoppm:
+        raise RuntimeError("缺少 Poppler 的 pdftoppm，无法渲染 PDF 页面。")
+
+    work_dir.mkdir(parents=True, exist_ok=True)
+    documents = [prepare_document(body, work_dir, "body", "正文", scale, pdftoppm)]
+    if answer:
+        documents.append(prepare_document(answer, work_dir, "answer", "答案", scale, pdftoppm))
+
+    manifest = {
+        "version": 2,
+        "render_scale": scale,
+        "document_count": len(documents),
+        "page_count": sum(document["page_count"] for document in documents),
+        "documents": documents,
     }
     manifest_path = work_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
-    scanned = sum(1 for page in manifest_pages if page["likely_scanned"])
-    print(f"已准备 {len(manifest_pages)} 页；疑似扫描页 {scanned} 页。")
+
+    summary = []
+    for document in documents:
+        scanned = sum(1 for page in document["pages"] if page["likely_scanned"])
+        summary.append(f"{document['label']} {document['page_count']} 页（疑似扫描页 {scanned}）")
+    print("已准备：" + "；".join(summary) + "。")
     print(f"清单：{manifest_path}")
     return manifest_path
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="将数学教辅 PDF 渲染为校对工作文件。")
-    parser.add_argument("pdf", type=Path, help="输入 PDF")
+    parser = argparse.ArgumentParser(description="预处理数学教辅正文和可选答案 PDF。")
+    parser.add_argument("--body", required=True, type=Path, help="正文 PDF")
+    parser.add_argument("--answer", type=Path, help="答案或解析 PDF，可省略")
     parser.add_argument("--work-dir", required=True, type=Path, help="工作目录")
     parser.add_argument("--scale", type=float, default=2.0, help="页面渲染倍率，默认 2.0")
     args = parser.parse_args()
     try:
-        prepare(args.pdf.resolve(), args.work_dir.resolve(), args.scale)
+        prepare(
+            args.body.resolve(),
+            args.answer.resolve() if args.answer else None,
+            args.work_dir.resolve(),
+            args.scale,
+        )
     except Exception as exc:
         print(f"处理失败：{exc}", file=sys.stderr)
         return 1
