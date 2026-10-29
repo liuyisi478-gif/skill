@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>数学教辅校对稿</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="document-heading">
+      <strong id="document-title">校对稿</strong>
+      <span id="document-meta"></span>
+    </div>
+    <div class="top-actions">
+      <div id="kind-filters" class="kind-filters" aria-label="问题筛选"></div>
+      <div class="zoom-actions" aria-label="页面缩放">
+        <button type="button" class="zoom-button active" data-zoom="fit">适宽</button>
+        <button type="button" class="zoom-button" data-zoom="1.2">放大 120%</button>
+        <button type="button" class="zoom-button" data-zoom="1.45">放大 145%</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section id="pages" class="pages" aria-label="原稿页面和定位批注"></section>
+    <aside class="sidebar" aria-label="批注列表">
+      <div class="sidebar-header">
+        <div>
+          <h2>批注列表 <span id="visible-count"></span></h2>
+          <p>点击批注定位到页面；按 <kbd>J</kbd>、<kbd>K</kbd> 逐条查看。</p>
+        </div>
+        <div class="view-toggle" aria-label="批注显示模式">
+          <button type="button" class="active" data-view="compact">清单</button>
+          <button type="button" data-view="detail">详情</button>
+        </div>
+      </div>
+      <div class="coverage">
+        <span id="coverage-text"></span>
+        <div id="page-nav" class="page-nav"></div>
+      </div>
+      <div id="issue-list" class="issue-list"></div>
+      <p id="empty-state" class="empty-state" hidden>当前筛选下没有批注。</p>
+      <p id="review-notice" class="review-notice"></p>
+    </aside>
+  </main>
+
+  <script src="review-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

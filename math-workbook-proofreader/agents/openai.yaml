@@ -1,0 +1,8 @@
+interface:
+  display_name: "数学教辅校对"
+  short_description: "将数学教辅 PDF 生成带定位批注的 HTML 校对稿"
+  brand_color: "#D97706"
+  default_prompt: "使用 $math-workbook-proofreader 校对这份数学教辅 PDF，并生成适合纸质誊红的 HTML 校对稿。"
+
+policy:
+  allow_implicit_invocation: true
