@@ -141,6 +141,35 @@ class FormatTests(unittest.TestCase):
         self.assertIn('快速答案表中多空答案用空格隔开', r.stdout)
         self.assertNotEqual(r.returncode, 0)
 
+    def test_calculation_direct_steps_without_jie_or_analysis(self):
+        self.ok('三、计算题', '$3+3$  \n$=6$')
+
+    def test_calculation_thought_then_steps_without_jie(self):
+        self.ok('三、计算题', '**【思路分析】** 先通分。\n\n$\\frac34+\\frac18$  \n$=\\frac68+\\frac18$  \n$=\\frac78$')
+
+    def test_calculation_forbids_analysis_even_with_jie(self):
+        for body in ['**【解析】**\n\n$3+3$  \n$=6$', '解：\n\n**【解析】** 计算。\n\n$3+3$  \n$=6$']:
+            with self.subTest(body=body):
+                self.bad('三、计算题', body, '计算题和解答题不加【解析】')
+
+    def test_solution_forbids_analysis_even_with_jie(self):
+        for body in ['**【解析】** 按份数计算。\n\n答：6本。', '解：按份数计算。\n\n**【解析】** 每份6本。\n\n答：6本。']:
+            with self.subTest(body=body):
+                self.bad('四、解答题', body, '计算题和解答题不加【解析】')
+
+    def test_objective_still_requires_analysis(self):
+        self.bad('一、填空题', '**6** 按比例计算。', '选择题、填空题缺少【解析】')
+
+    def test_solution_requires_jie_not_analysis(self):
+        self.bad('四、解答题', '**【思路分析】** 用份数法。\n\n答：6本。', '解答题应以「解：」写过程')
+
+    def test_calculation_child_does_not_change_next_solution_type(self):
+        body = '**【思路分析】** 先算。\n\n### （1）计算\n\n$3+3$  \n$=6$\n\n**【题型归类】** 归一归总\n\n## 第 2 题\n\n2.解：统计如下。\n\n| 组别 | 人数 |\n|---|---|\n| A | 12 |\n\n答：12人。'
+        self.ok('四、解答题', body)
+
+    def test_check_only_does_not_force_fabricated_solution(self):
+        self.ok('四、解答题', '**【题目核查】** 缺失边长，无法求解；须补齐条件。')
+
 
 if __name__ == '__main__':
     unittest.main()

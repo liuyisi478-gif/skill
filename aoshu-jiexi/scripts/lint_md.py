@@ -10,7 +10,8 @@
     丙档命令与符号
     模糊词：显然 / 易得 / 大概 / 可能 / 不难看出 / 同理可得
     泄漏进交付文件的质检字段：题干复原 / 置信 / 验算方式
-    每题缺【解析】（口算题除外）
+    选择/填空缺【解析】；计算/解答误加【解析】
+    解答题缺「解：」（计算题不要求「解：」或【解析】）
     每题缺【题型归类】
     【思路分析】【题图分析】出现在【解析】之后
     【易错警示】【一题多解】出现在【解析】之前
@@ -205,8 +206,11 @@ def split_blocks(lines):
 
 def section_kinds(lines):
     """记录每行所属题型；统计/应用题表格不按计算题表格误判。"""
-    kinds, current = {}, ""
+    kinds, current, section = {}, "", ""
     for i, line in enumerate(lines, 1):
+        if re.match(r"^##\s+第\s*\d+", line):
+            # 下一大题恢复章级题型，不继承上一题小题的“计算”状态。
+            current = section
         heading = re.match(r"^#{1,6}\s+(?!第\s*\d)(.+)", line)
         if heading:
             text = heading.group(1)
@@ -214,8 +218,12 @@ def section_kinds(lines):
                 current = "objective"
             elif re.search(r"计算|口算|求值|解方程|脱式|简算|简便运算", text):
                 current = "calculation"
-            elif re.search(r"判断|解答|解决问题|操作|实践|统计|知识点清单|快速对答案|详解详析", text):
+            elif re.search(r"解答|解决问题", text):
+                current = "solution"
+            elif re.search(r"判断|操作|实践|统计|知识点清单|快速对答案|详解详析", text):
                 current = ""
+            if not re.match(r"[（(]\d+[）)]", text):
+                section = current
         kinds[i] = current
     return kinds
 
@@ -230,11 +238,17 @@ def check_blocks(lines, new_terms):
             continue
         joined = "\n".join(block)
         is_kousuan = "口算" in title
-        is_jieda = "解：" in joined  # 解答题/计算题以「解：」起，不写【解析】
+        is_jieda = "解：" in joined  # 解答题用「解：」，计算题可直接写脱式。
         kind = kinds.get(start, "")
         if re.search(r"填空|选择", title):
             kind = "objective"
         elif re.search(r"计算|口算|求值|解方程|脱式|简算|简便运算", title):
+            kind = "calculation"
+        elif re.search(r"解答|解决问题", title):
+            kind = "solution"
+        # 解答题大章中的纯计算大题，也允许没有“解：”的直接脱式。
+        if kind == "solution" and not is_jieda and re.search(
+                r"^#{3,6}\s+.*(?:计算|求值|解方程|脱式|简算|简便运算)", joined, re.M):
             kind = "calculation"
 
         number = re.match(r"^##\s+第\s*(\d+)", title.strip()).group(1)
@@ -268,8 +282,13 @@ def check_blocks(lines, new_terms):
             if re.search(r"^\s*(?:```|~~~)", process, re.M):
                 add(errors, start, "计算过程禁止放入代码块，改为普通逐行脱式")
 
-        if "【解析】" not in joined and not is_kousuan and not is_jieda:
-            add(errors, start, "缺少【解析】栏目（解答题应以「解：」起）")
+        has_analysis = "【解析】" in joined
+        if (kind in ("calculation", "solution") or is_jieda or is_kousuan) and has_analysis:
+            add(errors, start, "计算题和解答题不加【解析】；只在原题型内容最前面加题号")
+        if kind == "objective" and not has_analysis and "【题目核查】" not in joined:
+            add(errors, start, "选择题、填空题缺少【解析】栏目")
+        if kind == "solution" and not is_jieda and "【题目核查】" not in joined:
+            add(errors, start, "解答题应以「解：」写过程，不改用【解析】")
         if "【题型归类】" not in joined:
             add(errors, start, "缺少【题型归类】栏目")
         else:
