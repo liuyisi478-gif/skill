@@ -14,8 +14,10 @@
     每题缺【题型归类】
     【思路分析】【题图分析】出现在【解析】之后
     【易错警示】【一题多解】出现在【解析】之前
+    填空/选择的答案与【解析】分行；算式结果单位未加括号
+    计算题用 Markdown/HTML 表格或代码块承载过程
 WARN：
-    公式与中文之间缺空格；公式内含中文；疑似公式单独成行；缺"快速对答案"节
+    公式与中文之间缺空格；公式内含中文；缺"快速对答案"节
     知识点不在词表中且未标〔新拟〕
     题型归类超过 4 个
     用了〔新拟〕但没有"新增知识点清单"节
@@ -37,6 +39,9 @@ FULLWIDTH = "，。；：（）【】、！？"
 PRE_ANSWER = ["【思路分析】", "【题图分析】"]
 POST_ANSWER = ["【易错警示】", "【一题多解】"]
 TITLE_RE = re.compile(r"^##\s+")
+# 匹配结果后常用单位；纯数、比、百分数、倍数和角度符号不强加括号。
+UNIT_RE = (r"(?:(?:平方|立方)?(?:千米|分米|厘米|毫米|米)(?:[/／](?:小时|分钟|秒|时|分))?"
+           r"|千克|毫克|克|吨|毫升|升|元|角|分(?!数|之一)|人|个|本|件|根|双|张|天|年|月|小时|分钟|秒)")
 
 NEW_TAG = "〔新拟〕"
 TAXONOMY = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -137,6 +142,7 @@ def add(bucket, ln, msg):
 
 
 def scan_lines(lines):
+    kinds = section_kinds(lines)
     for i, s in enumerate(lines, 1):
         if "$$" in s:
             add(errors, i, "块级公式 $$ 禁止使用，改为行内 $...$")
@@ -164,11 +170,21 @@ def scan_lines(lines):
                 add(errors, i, "公式内含全角标点：%s" % body)
             if re.search(r"[\u4e00-\u9fff]", body):
                 add(warns, i, "公式内含中文：%s" % body)
+            if "=" in body and re.match(r"\s*" + UNIT_RE, s[m.end():]):
+                add(errors, i, "算式结果单位须置于公式外的全角括号中，如 $12\\times3=36$（平方厘米）")
+            if "=" in body and re.search(r"\\(?:mathrm|text)\{(?:cm|mm|km|m|kg|g|ml|L|min|s)\}(?:\s*\^\s*(?:\{[23]\}|[23]))?\s*$", body):
+                add(errors, i, "算式结果的单位须移到公式外并加全角括号")
+        if re.search(r"(?:=|＝)\s*[+-]?\d+(?:\.\d+)?\s*" + UNIT_RE, re.sub(r"\$[^$]*\$", "", s)):
+            add(errors, i, "算式结果后的单位未加全角括号")
         if re.search(r"[\u4e00-\u9fff]\$", s) or re.search(r"\$[\u4e00-\u9fff]", s):
             add(warns, i, "公式与中文之间建议留一个半角空格")
-        t = s.strip()
-        if t.startswith("$") and t.endswith("$") and t.count("$") == 2 and len(t) > 2:
-            add(warns, i, "公式疑似单独成行，建议嵌入句子")
+        # 标准脱式及方程允许用单美元符号独立逐行，不因此产生警告。
+        formula_line = r"\s*\$[^$]+\$(?:（[^）]+）)?\s*"
+        if (kinds.get(i) == "calculation" and i < len(lines)
+                and re.fullmatch(formula_line, s)
+                and re.fullmatch(formula_line, lines[i])
+                and not s.endswith("  ")):
+            add(errors, i, "连续脱式行须在行末保留两个空格，确保Markdown实际逐行显示")
 
 
 def split_blocks(lines):
@@ -185,7 +201,25 @@ def split_blocks(lines):
     return blocks
 
 
+def section_kinds(lines):
+    """记录每行所属题型；统计/应用题表格不按计算题表格误判。"""
+    kinds, current = {}, ""
+    for i, line in enumerate(lines, 1):
+        heading = re.match(r"^#{1,6}\s+(?!第\s*\d)(.+)", line)
+        if heading:
+            text = heading.group(1)
+            if re.search(r"填空|选择", text):
+                current = "objective"
+            elif re.search(r"计算|口算|求值|解方程|脱式|简算|简便运算", text):
+                current = "calculation"
+            elif re.search(r"判断|解答|解决问题|操作|实践|统计|知识点清单|快速对答案|详解详析", text):
+                current = ""
+        kinds[i] = current
+    return kinds
+
+
 def check_blocks(lines, new_terms):
+    kinds = section_kinds(lines)
     for start, block in split_blocks(lines):
         if not TITLE_RE.match(block[0] or ""):
             continue
@@ -195,6 +229,26 @@ def check_blocks(lines, new_terms):
         joined = "\n".join(block)
         is_kousuan = "口算" in title
         is_jieda = "解：" in joined  # 解答题/计算题以「解：」起，不写【解析】
+        kind = kinds.get(start, "")
+        if re.search(r"填空|选择", title):
+            kind = "objective"
+        elif re.search(r"计算|口算|求值|解方程|脱式|简算|简便运算", title):
+            kind = "calculation"
+
+        if kind == "objective" and "【解析】" in joined and not is_jieda:
+            for offset, line in enumerate(block):
+                if "【解析】" in line:
+                    prefix = line.split("【解析】", 1)[0].strip("* \t")
+                    if not prefix:
+                        add(errors, start + offset, "填空题、选择题答案须与【解析】同一行、同一段紧接排写")
+                    break
+
+        if kind == "calculation" and not is_kousuan:
+            process = joined.split("【题型归类】", 1)[0]
+            if re.search(r"^\s*\|", process, re.M) or re.search(r"<table\b", process, re.I):
+                add(errors, start, "计算过程禁止使用表格，改为普通逐行脱式")
+            if re.search(r"^\s*(?:```|~~~)", process, re.M):
+                add(errors, start, "计算过程禁止放入代码块，改为普通逐行脱式")
 
         if "【解析】" not in joined and not is_kousuan and not is_jieda:
             add(errors, start, "缺少【解析】栏目（解答题应以「解：」起）")
