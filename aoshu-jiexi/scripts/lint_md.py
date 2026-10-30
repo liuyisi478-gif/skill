@@ -16,6 +16,8 @@
     【易错警示】【一题多解】出现在【解析】之前
     填空/选择的答案与【解析】分行；算式结果单位未加括号
     计算题用 Markdown/HTML 表格或代码块承载过程
+    每题正文首段缺题号或题号不一致；客观题答案部分使用分号
+    已有快速答案节却未采用表式；快速填空答案使用分号
 WARN：
     公式与中文之间缺空格；公式内含中文；缺"快速对答案"节
     知识点不在词表中且未标〔新拟〕
@@ -235,12 +237,28 @@ def check_blocks(lines, new_terms):
         elif re.search(r"计算|口算|求值|解方程|脱式|简算|简便运算", title):
             kind = "calculation"
 
+        number = re.match(r"^##\s+第\s*(\d+)", title.strip()).group(1)
+        # 跳过结构标题和空行，检查首个正文段，而非只检查独立的题目标题。
+        first = next(((offset, line) for offset, line in enumerate(block[1:], 1)
+                      if line.strip() and not re.match(r"^#{1,6}\s", line)), None)
+        if first:
+            offset, line = first
+            visible = line.replace("**", "").strip()
+            label = re.match(r"\s*(\d+)\s*\.\s*(\S.*)", visible)
+            if not label:
+                add(errors, start + offset, "每题正文首段须以题号.开头，并与首个栏目或答案同行")
+            elif int(label.group(1)) != int(number):
+                add(errors, start + offset, "正文题号与第%s题标题不一致" % number)
+
         if kind == "objective" and "【解析】" in joined and not is_jieda:
             for offset, line in enumerate(block):
                 if "【解析】" in line:
                     prefix = line.split("【解析】", 1)[0].strip("* \t")
+                    prefix = re.sub(r"^\d+\s*\.\s*", "", prefix).strip("* \t")
                     if not prefix:
                         add(errors, start + offset, "填空题、选择题答案须与【解析】同一行、同一段紧接排写")
+                    if re.search(r"[;；]", re.sub(r"\\[;,]", "", prefix)):
+                        add(errors, start + offset, "多空答案用空格隔开，答案部分不要使用分号")
                     break
 
         if kind == "calculation" and not is_kousuan:
@@ -275,6 +293,26 @@ def check_blocks(lines, new_terms):
                     add(errors, start, "%s 应放在答案之后" % kw)
 
 
+def check_quick_answers(lines):
+    """快速对答案采用表式；只查该节，不误判详解中的解释分号。"""
+    for start, line in enumerate(lines):
+        if not re.match(r"^#{1,6}\s+快速对答案\s*$", line):
+            continue
+        end = next((i for i in range(start + 1, len(lines))
+                    if re.match(r"^#{1,6}\s", lines[i])), len(lines))
+        body = lines[start + 1:end]
+        joined = "\n".join(body)
+        markdown_table = any(re.match(r"\s*\|?\s*:?-+:?\s*\|", s) for s in body)
+        html_table = re.search(r"<table\b", joined, re.I)
+        if not markdown_table and not html_table:
+            add(errors, start + 1, "快速对答案须直接采用表格排写")
+        # 填空行可用<br>换行，仍在同一Markdown物理行；HTML按行元素识别。
+        rows = re.findall(r"<tr\b[^>]*>.*?</tr>", joined, re.I | re.S) if html_table else body
+        for row in rows:
+            if "填空" in row and re.search(r"[;；]", re.sub(r"&(?:#\d+|#x[0-9a-f]+|[a-z]+);|\\[;,]", "", row, flags=re.I)):
+                add(errors, start + 1, "快速答案表中多空答案用空格隔开，不用分号")
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     strict = "--strict" in sys.argv
@@ -289,6 +327,7 @@ def main():
     scan_lines(lines)
     new_terms = []
     check_blocks(lines, new_terms)
+    check_quick_answers(lines)
 
     if "快速对答案" not in text:
         add(warns, 0, "缺少「快速对答案」汇总节（如客户不需要可忽略）")
