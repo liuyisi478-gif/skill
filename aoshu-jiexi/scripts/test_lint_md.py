@@ -13,7 +13,7 @@ class FormatTests(unittest.TestCase):
         if numbered:
             body = '**1. ' + body[2:] if body.startswith('**') else '1.' + body
         if quick is None:
-            quick = '| 填空题 | **1.** 36 |\n|---|---|\n| 解答题 | 请看详解。 |'
+            quick = '| 一、填空题　**1.** 36 |\n|---|\n| 各题解析请看“详解详析” |'
         text = '# 测试卷\n\n## 快速对答案\n' + quick + '\n\n### ' + section + '\n\n## ' + title + '\n\n' + body + '\n\n**【题型归类】** 归一归总\n'
         with tempfile.TemporaryDirectory() as d:
             f = Path(d) / 'sample.md'
@@ -137,7 +137,7 @@ class FormatTests(unittest.TestCase):
         self.assertNotEqual(r.returncode, 0)
 
     def test_quick_blanks_forbid_semicolons(self):
-        r = self.lint('一、填空题', '**12 18【解析】** 按比例计算。', quick='| 填空题 | **1.** 12；18 |\n|---|---|')
+        r = self.lint('一、填空题', '**12 18【解析】** 按比例计算。', quick='| 一、填空题　**1.** 12；18 |\n|---|')
         self.assertIn('快速答案表中多空答案用空格隔开', r.stdout)
         self.assertNotEqual(r.returncode, 0)
 
@@ -169,6 +169,22 @@ class FormatTests(unittest.TestCase):
 
     def test_check_only_does_not_force_fabricated_solution(self):
         self.ok('四、解答题', '**【题目核查】** 缺失边长，无法求解；须补齐条件。')
+
+    def test_old_two_column_quick_table_rejected(self):
+        r = self.lint('一、填空题', '**6【解析】** 直接计算。', quick='| 填空题 | 1. 6 |\n|---|---|')
+        self.assertIn('同一外框单列', r.stdout)
+        self.assertNotEqual(r.returncode, 0)
+
+    def test_quick_keeps_major_number_inside_table(self):
+        r = self.lint('一、填空题', '**6【解析】** 直接计算。', quick='| 填空题　1. 6 |\n|---|')
+        self.assertIn('原卷大题序号', r.stdout)
+
+    def test_no_objective_needs_no_quick_section(self):
+        with tempfile.TemporaryDirectory() as d:
+            f = Path(d) / 'sample.md'
+            f.write_text('### 三、计算题\n## 第 1 题\n1.$3+3$  \n$=6$\n\n**【题型归类】** 归一归总', encoding='utf-8')
+            r = subprocess.run([sys.executable, '-X', 'utf8', str(LINTER), str(f), '--strict'], capture_output=True, text=True, encoding='utf-8')
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
 
 
 if __name__ == '__main__':

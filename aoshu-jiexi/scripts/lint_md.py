@@ -313,7 +313,7 @@ def check_blocks(lines, new_terms):
 
 
 def check_quick_answers(lines):
-    """快速对答案采用表式；只查该节，不误判详解中的解释分号。"""
+    """Internal draft only: one frame, real objective sections and original numbering."""
     for start, line in enumerate(lines):
         if not re.match(r"^#{1,6}\s+快速对答案\s*$", line):
             continue
@@ -325,6 +325,24 @@ def check_quick_answers(lines):
         html_table = re.search(r"<table\b", joined, re.I)
         if not markdown_table and not html_table:
             add(errors, start + 1, "快速对答案须直接采用表格排写")
+        if html_table:
+            if len(re.findall(r"<table\b", joined, re.I)) != 1:
+                add(errors, start + 1, "快速答案须在同一个表格中")
+            if any(len(re.findall(r"<t[dh]\b", row, re.I)) != 1 for row in re.findall(r"<tr\b[^>]*>.*?</tr>", joined, re.I | re.S)):
+                add(errors, start + 1, "快速答案用同一外框单列，不把题型和答案分列")
+        elif markdown_table:
+            for row in body:
+                if row.strip().startswith("|") and len(row.strip().strip("|").split("|")) != 1:
+                    add(errors, start + 1, "快速答案用同一外框单列，不把题型和答案分列")
+                    break
+        visible = re.sub(r"<[^>]*>|\*\*", "", joined)
+        if re.search(r"解答题\s*\||计算题\s*\||[一二三四五六七八九十]+、\s*(?:解答|计算)", visible):
+            add(errors, start + 1, "快速答案仅列选择和填空，解答题只作详解提示")
+        for kind in ("选择", "填空"):
+            if kind in visible and not re.search(r"[一二三四五六七八九十]+[、．.]\s*" + kind, visible):
+                add(errors, start + 1, "快速答案题型须保留原卷大题序号，与小题号同在表内")
+        if re.search(r"[Pp]\s*\d+|第?\s*\d+\s*页", visible):
+            add(warns, start + 1, "静态详解页码需在最终Word排版后核验，勿抄样图页码")
         # 填空行可用<br>换行，仍在同一Markdown物理行；HTML按行元素识别。
         rows = re.findall(r"<tr\b[^>]*>.*?</tr>", joined, re.I | re.S) if html_table else body
         for row in rows:
@@ -333,6 +351,8 @@ def check_quick_answers(lines):
 
 
 def main():
+    errors.clear()
+    warns.clear()
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     strict = "--strict" in sys.argv
     if not args:
@@ -348,8 +368,8 @@ def main():
     check_blocks(lines, new_terms)
     check_quick_answers(lines)
 
-    if "快速对答案" not in text:
-        add(warns, 0, "缺少「快速对答案」汇总节（如客户不需要可忽略）")
+    if "快速对答案" not in text and "objective" in section_kinds(lines).values():
+        add(warns, 0, "存在选择/填空题但缺少「快速对答案」汇总节")
     if new_terms and "新增知识点清单" not in text:
         add(warns, 0, "本题卷标了 %d 处%s，文末缺少「新增知识点清单」汇总节"
             % (len(new_terms), NEW_TAG))

@@ -38,6 +38,10 @@ def frac(x, y=None):
 
 def take(gen, n):
     """取生成器的前 n 项。"""
+    if n < 0:
+        raise ValueError("n must be nonnegative")
+    if n == 0:
+        return []
     out = []
     for v in gen:
         out.append(v)
@@ -66,13 +70,15 @@ def digit_sum(n):
 def find_cycle(seq, key=None, max_len=None):
     """在有限序列中找最短循环节，返回该循环节列表。
 
-    找不到返回 None。用于"第 n 项末位""第 n 次出现"类题，
-    先实测周期长度，不凭直觉假定为 4 或 10。
+    找不到返回 None。这只是有限样本的候选周期，不是无限序列周期证明。
+    外推前须检查完整递推状态重复或另证周期。
     """
     k = key or (lambda x: x)
     v = [k(x) for x in seq]
     n = len(v)
-    limit = max_len or n // 2
+    if max_len is not None and max_len < 1:
+        raise ValueError("max_len must be positive")
+    limit = min(max_len, n // 2) if max_len is not None else n // 2
     for p in range(1, limit + 1):
         ok = True
         for i in range(n - p):
@@ -86,17 +92,21 @@ def find_cycle(seq, key=None, max_len=None):
 
 def nth_by_cycle(cycle, n):
     """按循环节取第 n 项（n 从 1 开始）。"""
+    if not cycle or n < 1:
+        raise ValueError("A nonempty proven cycle and positive n are required")
     return cycle[(n - 1) % len(cycle)]
 
 
 # ---------- 枚举 ----------
 
 def all_of(pred, iterable, limit=100000):
-    """穷举所有满足条件的元素（防漏解）。"""
+    """穷举范围内满足条件的元素；超过检查上限报错，不返回不完整结果。"""
+    if limit < 0:
+        raise ValueError("limit must be nonnegative")
     out = []
     for i, x in enumerate(iterable):
-        if i > limit:
-            break
+        if i >= limit:
+            raise RuntimeError("Enumeration limit reached; search is incomplete")
         if pred(x):
             out.append(x)
     return out
@@ -188,4 +198,4 @@ if __name__ == "__main__":
     print("== 自检：分数精确计算 ==")
     check("合作完成天数", work_together(6, 12), 4)
 
-    summary()
+    raise SystemExit(0 if summary() else 1)
