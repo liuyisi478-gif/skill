@@ -241,6 +241,18 @@ def validate_source(data):
             seen.add(number)
             if not isinstance(q.get("paragraphs"), list) or not q["paragraphs"]:
                 raise ValueError("Question has no body")
+            diagrams = question_diagrams(q)
+            if q.get('diagram_required') and not diagrams:
+                raise ValueError('Required solution diagram is missing for question ' + number)
+            for diagram in diagrams:
+                index = diagram['after_paragraph']
+                if isinstance(index, bool) or not isinstance(index,int) or not -1 <= index < len(q['paragraphs']):
+                    raise ValueError('Diagram insertion position is outside the question')
+                width = diagram.get('width_cm', 10)
+                if not isinstance(width,(int,float)) or not 2 <= width <= 17:
+                    raise ValueError('Diagram width must be between 2 and 17 cm')
+                if not diagram.get('path') or not isinstance(diagram['path'],str):
+                    raise ValueError('Diagram image path is missing')
             answer = q.get("answer")
             if answer is not None and (not isinstance(answer, str) or not answer.strip()):
                 raise ValueError("Answer must be a nonempty string or null")
@@ -266,7 +278,20 @@ def signature(element):
             tuple(signature(child) for child in element))
 
 
-def validate_docx(path, expected):
+def question_diagrams(question):
+    if question.get('figure') and question.get('diagrams'):
+        raise ValueError('Use diagrams or legacy figure, not both')
+    if question.get('figure'):
+        return [{'path':question['figure'], 'caption':question.get('figure_caption',''),
+                 'width_cm':question.get('figure_width_cm',6),
+                 'after_paragraph':len(question['paragraphs'])-1}]
+    diagrams=question.get('diagrams',[])
+    if not isinstance(diagrams,list) or any(not isinstance(d,dict) for d in diagrams):
+        raise ValueError('diagrams must be a list of objects')
+    return [dict(d,after_paragraph=d.get('after_paragraph',0)) for d in diagrams]
+
+
+def validate_docx(path, expected, expected_images=None):
     with ZipFile(path) as z:
         if z.testzip() is not None:
             raise ValueError("DOCX ZIP integrity failed")
@@ -277,6 +302,23 @@ def validate_docx(path, expected):
                 etree.fromstring(z.read(name))
         root = etree.fromstring(z.read("word/document.xml"))
         actual = root.findall(".//m:oMath", NS)
+        drawings = root.findall('.//' + qn('w:drawing'))
+        if expected_images is not None and len(drawings) != expected_images:
+            raise ValueError('Embedded diagram count differs from source')
+        relations = etree.fromstring(z.read('word/_rels/document.xml.rels'))
+        rels = {r.get('Id'):r for r in relations}
+        for drawing in drawings:
+            blips=drawing.findall('.//{http://schemas.openxmlformats.org/drawingml/2006/main}blip')
+            if len(blips) != 1:
+                raise ValueError('Unexpected diagram drawing structure')
+            relation=rels.get(blips[0].get(qn('r:embed')))
+            if relation is None or relation.get('TargetMode') == 'External':
+                raise ValueError('Diagram must be embedded, not externally linked')
+            target=relation.get('Target')
+            from posixpath import normpath
+            media=normpath('word/'+target)
+            if not media.startswith('word/media/') or not z.read(media):
+                raise ValueError('Embedded diagram image is missing')
         # Document body order is table first, then body, matching construction order.
         if [signature(x) for x in actual] != [signature(x) for x in expected]:
             raise ValueError("OMML inventory differs from the source formula inventory")
@@ -286,7 +328,7 @@ def validate_docx(path, expected):
     Document(path)
     return {"formulas": len(actual), "fractions": len(root.findall(".//m:f", NS)),
             "subscripts": len(root.findall(".//m:sSub", NS)),
-            "superscripts": len(root.findall(".//m:sSup", NS))}
+            "superscripts": len(root.findall(".//m:sSup", NS)), "diagrams":len(drawings)}
 
 
 def export(data, output, base_dir=Path(".")):
@@ -320,6 +362,24 @@ def export(data, output, base_dir=Path(".")):
     doc.settings._element.append(math_props)
     doc.add_paragraph(data["title"], "Title")
     expected = []
+    image_count = 0
+
+    def insert_diagram(diagram):
+        nonlocal image_count
+        image = Path(diagram['path'])
+        image = image if image.is_absolute() else base_dir / image
+        if not image.is_file():
+            raise ValueError('Diagram image does not exist: ' + str(image))
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        shape = p.add_run().add_picture(str(image), width=Cm(diagram.get('width_cm',10)))
+        shape._inline.docPr.set('descr',diagram.get('alt_text',diagram.get('caption','数学解答图')))
+        p.paragraph_format.keep_together = True
+        if diagram.get('caption'):
+            p.paragraph_format.keep_with_next = True
+            caption = doc.add_paragraph(diagram['caption'])
+            caption.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        image_count += 1
     qa = data.get("mode") == "qa"
     if not qa:
         quick_answers(doc, data, expected)
@@ -327,17 +387,18 @@ def export(data, output, base_dir=Path(".")):
     for s in data["sections"]:
         doc.add_heading(s["label"], level=2)
         for question in s["questions"]:
-            for source in question["paragraphs"]:
-                rich(doc.add_paragraph(), source, expected)
-            if question.get("figure"):
-                image = Path(question["figure"])
-                image = image if image.is_absolute() else base_dir / image
-                p = doc.add_paragraph()
-                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                p.add_run().add_picture(str(image), width=Cm(6))
-                if question.get("figure_caption"):
-                    p = doc.add_paragraph(question["figure_caption"])
-                    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            diagrams=question_diagrams(question)
+            for diagram in diagrams:
+                if diagram['after_paragraph'] == -1:
+                    insert_diagram(diagram)
+            for index, source in enumerate(question["paragraphs"]):
+                p=doc.add_paragraph()
+                rich(p, source, expected)
+                attached=[d for d in diagrams if d['after_paragraph']==index]
+                if attached:
+                    p.paragraph_format.keep_with_next=True
+                for diagram in attached:
+                    insert_diagram(diagram)
             if not qa:
                 p = doc.add_paragraph()
                 rich(p, "**【题型归类】** " + question["taxonomy"], expected)
@@ -356,7 +417,7 @@ def export(data, output, base_dir=Path(".")):
     with tempfile.TemporaryDirectory(dir=output.parent) as temp:
         candidate = Path(temp) / "candidate.docx"
         doc.save(candidate)
-        stats = validate_docx(candidate, expected)
+        stats = validate_docx(candidate, expected, image_count)
         candidate.replace(output)
     return stats
 
