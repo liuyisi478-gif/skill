@@ -50,8 +50,6 @@ def prepare_document(
         raise ValueError(f"{label}文件必须是 PDF。")
 
     role_root = work_dir / document_id
-    if role_root.exists():
-        shutil.rmtree(role_root)
     pages_dir = role_root / "pages"
     text_dir = role_root / "text"
     blocks_dir = role_root / "blocks"
@@ -87,7 +85,12 @@ def prepare_document(
                 capture_output=True,
             )
 
-            words = page.extract_words(use_text_flow=True, keep_blank_chars=False) or []
+            extraction_error = None
+            try:
+                words = page.extract_words(use_text_flow=True, keep_blank_chars=False) or []
+            except Exception as exc:
+                words = []
+                extraction_error = str(exc)
             blocks = []
             extracted_parts = []
             for word in words:
@@ -113,6 +116,8 @@ def prepare_document(
                     "blocks": f"{document_id}/blocks/{blocks_name}",
                     "extracted_characters": len(extracted_text),
                     "likely_scanned": len(extracted_text.strip()) < 20,
+                    "image_sha256": sha256(pages_dir / image_name),
+                    "extraction_error": extraction_error,
                 }
             )
 
@@ -137,12 +142,28 @@ def prepare(body: Path, answer: Path | None, work_dir: Path, scale: float) -> Pa
         raise RuntimeError("缺少 Poppler 的 pdftoppm，无法渲染 PDF 页面。")
 
     work_dir.mkdir(parents=True, exist_ok=True)
+    old_path = work_dir / "manifest.json"
+    if old_path.exists():
+        old = json.loads(old_path.read_text(encoding="utf-8-sig"))
+        expected = [("body", sha256(body))] + ([("answer", sha256(answer))] if answer else [])
+        actual = [(d["id"], d["source_sha256"]) for d in old["documents"]]
+        if expected != actual or old.get("render_scale") != scale:
+            raise ValueError("PDF 或渲染倍率已变化，请使用新的工作目录，避免覆盖封存校对结果。")
+        intact = all((work_dir / p[key]).is_file() for d in old["documents"] for p in d["pages"]
+                     for key in ("work_image", "text", "blocks"))
+        intact = intact and all(not p.get("image_sha256") or sha256(work_dir / p["work_image"]) == p["image_sha256"]
+                                for d in old["documents"] for p in d["pages"])
+        if intact:
+            print(f"复用未变化的预处理结果：{old_path}")
+            return old_path
+        raise ValueError("预处理资源缺失或变化；请在新目录重新准备，保留当前审计记录。")
     documents = [prepare_document(body, work_dir, "body", "正文", scale, pdftoppm)]
     if answer:
         documents.append(prepare_document(answer, work_dir, "answer", "答案", scale, pdftoppm))
 
     manifest = {
         "version": 2,
+        "audit_required": True,
         "render_scale": scale,
         "document_count": len(documents),
         "page_count": sum(document["page_count"] for document in documents),

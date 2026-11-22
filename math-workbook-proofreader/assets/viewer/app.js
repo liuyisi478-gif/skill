@@ -14,7 +14,7 @@
   const issues = Array.isArray(review.issues) ? review.issues : [];
   const kindLabels = {
     confirmed: "确定错误",
-    suspected: "疑似问题",
+    suspected: "待人工复核",
     suggestion: "优化建议"
   };
   const scopeLabels = { all: "全部", body: "正文", answer: "答案", cross: "题答对照" };
@@ -169,7 +169,10 @@
     card.className = `issue-card ${issue.kind}`;
     card.dataset.issueId = String(issue.id);
     card.tabIndex = 0;
-    const targetLabels = issue.targets.map(targetLabel).join(" ↔ ");
+    const allTargetLabels = issue.targets.map(targetLabel);
+    const targetLabels = allTargetLabels.length > 2
+      ? `${allTargetLabels.slice(0, 2).join(" ↔ ")} 等${allTargetLabels.length}处`
+      : allTargetLabels.join(" ↔ ");
     const targetButtons = issue.targets.map((target, index) =>
       `<button type="button" class="target-link" data-target-index="${index}">${escapeHtml(targetLabel(target))}</button>`
     ).join("");
@@ -178,7 +181,7 @@
         <span class="issue-number">${issue.id}</span>
         <span class="issue-kind">${kindLabels[issue.kind]}</span>
         <span class="issue-category">${escapeHtml(issue.category)}</span>
-        <span class="issue-page">${escapeHtml(targetLabels)}</span>
+        <span class="issue-page" title="${escapeHtml(allTargetLabels.join(" ↔ "))}">${escapeHtml(targetLabels)}</span>
       </div>
       <p class="issue-summary">${escapeHtml(issue.title)}</p>
       ${issue.questionId ? `<p class="issue-question">${escapeHtml(issue.questionId)}</p>` : ""}
@@ -228,6 +231,7 @@
   }
 
   function activateIssue(issueId, targetIndex, scrollPage) {
+    if (document.body.classList.contains("answers-view")) setSidebarView("detail");
     activeIssueId = issueId;
     document.querySelectorAll("[data-issue-id]").forEach(element => {
       element.classList.toggle("active", Number(element.dataset.issueId) === issueId);
@@ -240,7 +244,16 @@
       const destination = document.querySelector(selector) || document.getElementById(`${target.document}-page-${target.page}`);
       destination?.scrollIntoView({ block: "center" });
     }
-    document.querySelector(`.issue-card[data-issue-id="${issueId}"]`)?.scrollIntoView({ block: "nearest" });
+    // Keep the selected card visible without scrolling the document back away
+    // from the page or annotation that was just selected.
+    const list = document.getElementById("issue-list");
+    const card = list?.querySelector(`.issue-card[data-issue-id="${issueId}"]`);
+    if (list && card) {
+      const listRect = list.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      if (cardRect.top < listRect.top) list.scrollTop += cardRect.top - listRect.top;
+      else if (cardRect.bottom > listRect.bottom) list.scrollTop += cardRect.bottom - listRect.bottom;
+    }
   }
 
   function escapeHtml(value) {
@@ -261,12 +274,17 @@
     });
   });
 
-  document.querySelectorAll("[data-view]").forEach(button => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll("[data-view]").forEach(item => item.classList.remove("active"));
-      button.classList.add("active");
-      document.body.classList.toggle("detail-view", button.dataset.view === "detail");
+  function setSidebarView(view) {
+    document.querySelectorAll("[data-view]").forEach(button => {
+      const selected = button.dataset.view === view;
+      button.classList.toggle("active", selected);
+      button.setAttribute("aria-pressed", String(selected));
     });
+    document.body.classList.toggle("detail-view", view === "detail");
+    document.body.classList.toggle("answers-view", view === "answers");
+  }
+  document.querySelectorAll("[data-view]").forEach(button => {
+    button.addEventListener("click", () => setSidebarView(button.dataset.view));
   });
 
   document.addEventListener("keydown", event => {
@@ -279,10 +297,95 @@
     activateIssue(list[next].id, 0, true);
   });
 
+  const topbar = document.querySelector(".topbar");
+  if (topbar && typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(() => {
+      document.documentElement.style.setProperty("--sidebar-top", `${topbar.getBoundingClientRect().height + 14}px`);
+    }).observe(topbar);
+  }
+
   makeScopeFilters();
   makeKindFilters();
   makePages();
   makePageNav();
-  document.getElementById("coverage-text").textContent = `检查覆盖 ${manifest.page_count}/${manifest.page_count} 页 · 批注 ${issues.length} 条`;
+  const coverage = payload.coverage;
+  document.getElementById("coverage-text").textContent = coverage
+    ? `逐题检查 ${coverage.processed}/${coverage.total} · 待人工 ${coverage.records.filter(r => r.manual_review).length} · 批注 ${issues.length} 条`
+    : `共 ${manifest.page_count} 页 · 未提供逐题执行记录，检查覆盖未知`;
+  const auditHost = document.getElementById("audit-results");
+  if (auditHost && coverage) {
+    const concise = document.createElement("details");
+    concise.open = true;
+    concise.className = "concise-answers";
+    const conciseTitle = document.createElement("summary");
+    conciseTitle.textContent = "正文精简答案";
+    concise.appendChild(conciseTitle);
+    const conciseScroll = document.createElement("div");
+    conciseScroll.className = "concise-scroll";
+    const conciseTable = document.createElement("table");
+    (payload.concise_answers || []).forEach(row => {
+      const tr = document.createElement("tr");
+      const name = document.createElement("td");
+      const jump = document.createElement("button");
+      jump.type = "button";
+      jump.className = "answer-jump";
+      jump.textContent = row.id;
+      jump.addEventListener("click", () => {
+        const target = row.targets?.[0];
+        if (!target) return;
+        const page = document.getElementById(`${target.document}-page-${target.page}`);
+        document.querySelectorAll(".answer-focus").forEach(node => node.remove());
+        const sheet = page?.querySelector(".page-sheet");
+        if (sheet && target.bbox) {
+          const focus = document.createElement("div");
+          focus.className = "answer-focus";
+          const b = target.bbox;
+          Object.assign(focus.style, { left: `${b.x * 100}%`, top: `${b.y * 100}%`, width: `${b.width * 100}%`, height: `${b.height * 100}%` });
+          sheet.appendChild(focus);
+          focus.scrollIntoView({ block: "center" });
+        } else page?.scrollIntoView({ block: "center" });
+      });
+      name.appendChild(jump);
+      const value = document.createElement("td");
+      value.textContent = (row.answer || []).map(a => `${a.value}${a.unit || ""}`).join("；") || "待求解";
+      if (row.status !== "ready" || row.corrected) {
+        const status = document.createElement("small");
+        status.className = row.status === "ready" ? "answer-corrected" : "answer-pending";
+        status.textContent = row.status === "missing" ? "未完成" : row.status === "pending" ? "待复核" : "已更正";
+        value.appendChild(status);
+      }
+      tr.append(name, value); conciseTable.appendChild(tr);
+    });
+    if (!(payload.concise_answers || []).length) {
+      const empty = document.createElement("p");
+      empty.textContent = "尚无独立解答记录";
+      conciseScroll.appendChild(empty);
+    }
+    conciseScroll.appendChild(conciseTable);
+    concise.appendChild(conciseScroll); auditHost.appendChild(concise);
+    const details = document.createElement("details");
+    const summary = document.createElement("summary");
+    summary.textContent = "详细解题记录与逐题状态";
+    details.appendChild(summary);
+    const historyNote = document.createElement("p");
+    historyNote.textContent = "以下保留初次独立解答；如有更正，以精简答案中的更正值为准。";
+    details.appendChild(historyNote);
+    const answers = Object.fromEntries((payload.independent_answers || []).map(r => [r.id, r]));
+    const table = document.createElement("table");
+    const head = document.createElement("tr");
+    ["题号 / 状态", "独立答案及简要过程"].forEach(text => { const th = document.createElement("th"); th.textContent = text; head.appendChild(th); });
+    table.appendChild(head);
+    coverage.records.forEach(row => {
+      const tr = document.createElement("tr");
+      const name = document.createElement("td");
+      name.textContent = `${row.id} · ${!row.complete ? "未完成" : row.manual_review ? "待人工" : "已检查"}`;
+      name.title = JSON.stringify(row, null, 2);
+      const answer = document.createElement("td");
+      const a = answers[row.id];
+      answer.textContent = a ? `${(a.answer || []).map(v => `${v.value}${v.unit || ""}`).join("；") || "无法可靠求解"}。${a.reasoning}` : "未完成独立解题";
+      tr.append(name, answer); table.appendChild(tr);
+    });
+    details.appendChild(table); auditHost.appendChild(details);
+  }
   refreshFilters();
 })();

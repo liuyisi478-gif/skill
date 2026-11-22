@@ -28,20 +28,31 @@
     <aside class="sidebar" aria-label="批注列表">
       <div class="sidebar-header">
         <div>
-          <h2>批注列表 <span id="visible-count"></span></h2>
+          <h2>校对查阅 <span id="visible-count"></span></h2>
           <p>点击批注定位到页面；按 <kbd>J</kbd>、<kbd>K</kbd> 逐条查看。</p>
         </div>
-        <div class="view-toggle" aria-label="批注显示模式">
-          <button type="button" class="active" data-view="compact">清单</button>
-          <button type="button" data-view="detail">详情</button>
+        <div class="sidebar-controls">
+        <div class="view-toggle" aria-label="侧栏显示内容">
+          <button type="button" class="active" data-view="compact" aria-pressed="true">清单</button>
+          <button type="button" data-view="detail" aria-pressed="false">详情</button>
+          <button type="button" data-view="answers" aria-pressed="false">答案</button>
+        </div>
         </div>
       </div>
-      <div class="coverage">
-        <span id="coverage-text"></span>
+      <div class="coverage"><span id="coverage-text"></span></div>
+      <details class="page-navigation">
+        <summary>页码链接</summary>
         <div id="page-nav" class="page-nav"></div>
+      </details>
+      <div class="sidebar-regions">
+        <section class="sidebar-region answers-region" aria-label="精简答案">
+          <div id="audit-results"></div>
+        </section>
+        <section class="sidebar-region issues-region" aria-label="问题清单">
+          <div id="issue-list" class="issue-list"></div>
+          <p id="empty-state" class="empty-state" hidden>当前筛选下没有批注。</p>
+        </section>
       </div>
-      <div id="issue-list" class="issue-list"></div>
-      <p id="empty-state" class="empty-state" hidden>当前筛选下没有批注。</p>
       <p id="review-notice" class="review-notice"></p>
     </aside>
   </main>

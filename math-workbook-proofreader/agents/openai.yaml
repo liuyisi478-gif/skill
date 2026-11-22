@@ -2,7 +2,7 @@ interface:
   display_name: "数学教辅校对"
   short_description: "配对校对正文与答案 PDF，生成带定位批注的 HTML"
   brand_color: "#D97706"
-  default_prompt: "使用 $math-workbook-proofreader 配对校对正文与答案 PDF，并生成适合纸质誊红的 HTML 校对稿。"
+  default_prompt: "使用 $math-workbook-proofreader 按六阶段校对正文与答案 PDF：逐页看图分题，先封存正文独立答案，再独立核查原稿解析、三方比对及疑难复核，保存逐题覆盖记录，生成带定位批注和独立答案表的 HTML。"
 
 policy:
   allow_implicit_invocation: true
